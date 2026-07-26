@@ -1,0 +1,41 @@
+/* Item Hover Value Tooltip Styles */
+
+#item-hover-tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+  display: none;
+  --iht-icon-size: 24px;
+  --iht-font-size: 12px;
+  --iht-text-color: #f0d9a8;
+  --iht-opacity: 85%;
+}
+
+#item-hover-tooltip .iht-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(20, 18, 15, 0.95);
+  border: 1px solid rgba(232, 160, 76, 0.4);
+  border-radius: 6px;
+  padding: 6px 8px;
+  backdrop-filter: blur(4px);
+  opacity: var(--iht-opacity);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+#item-hover-tooltip .iht-icon {
+  width: var(--iht-icon-size);
+  height: var(--iht-icon-size);
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+#item-hover-tooltip .iht-value {
+  font-size: var(--iht-font-size);
+  font-weight: 600;
+  color: var(--iht-text-color);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
