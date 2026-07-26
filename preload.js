@@ -50,5 +50,8 @@ contextBridge.exposeInMainWorld('api', {
   onItemCopied: (cb) => ipcRenderer.on('item-copied', (_e, text) => cb(text)),
   onItemCopyFailed: (cb) => ipcRenderer.on('item-copy-failed', () => cb()),
   onTrade2Wait: (cb) => ipcRenderer.on('trade2-wait', (_e, info) => cb(info)),
-  writeClipboard: (text) => ipcRenderer.invoke('write-clipboard', text)
+  writeClipboard: (text) => ipcRenderer.invoke('write-clipboard', text),
+  // Item hover tooltip
+  getItemHoverConfig: () => ipcRenderer.invoke('get-item-hover-config'),
+  setItemHoverConfig: (config) => ipcRenderer.invoke('set-item-hover-config', config)
 });

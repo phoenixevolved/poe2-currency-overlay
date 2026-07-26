@@ -7,6 +7,8 @@
   <title>POE2 Price Overlay</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="item/item.css" />
+  <!-- Item hover tooltip -->
+  <link rel="stylesheet" href="item-hover-tooltip.css" />
 </head>
 <body>
   <div id="root">
@@ -71,30 +73,90 @@
               <span class="live-dot"></span><span id="feed-status" class="feed-status">public API</span>
               <span class="set-note">Game must be in Windowed or Windowed&nbsp;Fullscreen mode.</span>
             </div>
-            <label class="switch set-excl" title="Replace currency names/units with their icons next to prices on the Price Check and Desecrate tabs. Hover or screen readers still get the full name."><input type="checkbox" id="currency-icons" /><span class="sw-track"></span><span class="sw-lab">Show currency icons instead of names</span><span class="set-sub">Price Check &amp; Desecrate - hover still shows the name</span></label>
+            <label class="switch set-excl" title="Replace currency names/units with their icons next to prices on the Price Check and Desecrate tabs. Hover or screen readers still get the full name."><input type="checkbox" id="currency-icons" /><span class="sw-track"></span><span class="sw-lab">Show currency icons</span></label>
+
+            <!-- Item Hover Tooltip Settings -->
+            <div class="set-card" style="margin-top: 16px; padding: 12px 14px;">
+              <div class="set-card-lab">Item Hover Value Display</div>
+              
+              <div class="settings-row" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <label class="switch" style="flex: 1;">
+                  <input type="checkbox" id="item-hover-enabled">
+                  <span class="sw-track"></span>
+                  <span class="sw-lab">Show value tooltip when holding hotkey</span>
+                </label>
+              </div>
+              
+              <div class="settings-row" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <label for="item-hover-hotkey" style="min-width: 100px; color: #a89f8c; font-size: 11px;">Activation Key:</label>
+                <select id="item-hover-hotkey" style="flex: 1; background: rgba(10, 9, 8, 0.8); border: 1px solid rgba(214, 126, 44, 0.3); color: #d8d4c8; padding: 5px 8px; border-radius: 4px; font-size: 12px;">
+                  <option value="alt">Alt</option>
+                  <option value="ctrl">Ctrl</option>
+                  <option value="shift">Shift</option>
+                  <option value="super">Super (Windows Key)</option>
+                </select>
+              </div>
+              
+              <div class="settings-row" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <label for="item-hover-position" style="min-width: 100px; color: #a89f8c; font-size: 11px;">Display Position:</label>
+                <select id="item-hover-position" style="flex: 1; background: rgba(10, 9, 8, 0.8); border: 1px solid rgba(214, 126, 44, 0.3); color: #d8d4c8; padding: 5px 8px; border-radius: 4px; font-size: 12px;">
+                  <option value="top-right">Top Right (default)</option>
+                  <option value="bottom-right">Bottom Right</option>
+                  <option value="top-left">Top Left</option>
+                  <option value="bottom-left">Bottom Left</option>
+                </select>
+              </div>
+              
+              <div class="settings-row" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <label style="min-width: 100px; color: #a89f8c; font-size: 11px;">Icon Size:</label>
+                <div class="cslider" id="item-hover-icon-size-slider" style="flex: 1;"></div>
+                <span class="scale-value" id="item-hover-icon-size-value" style="min-width: 40px;">24px</span>
+              </div>
+              
+              <div class="settings-row" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <label style="min-width: 100px; color: #a89f8c; font-size: 11px;">Font Size:</label>
+                <div class="cslider" id="item-hover-font-size-slider" style="flex: 1;"></div>
+                <span class="scale-value" id="item-hover-font-size-value" style="min-width: 40px;">12px</span>
+              </div>
+              
+              <div class="settings-row" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <label for="item-hover-text-color" style="min-width: 100px; color: #a89f8c; font-size: 11px;">Text Color:</label>
+                <input type="color" id="item-hover-text-color" value="#f0d9a8" style="flex-shrink: 0; width: 50px; height: 32px; border-radius: 4px; border: 1px solid rgba(214, 126, 44, 0.3);">
+              </div>
+              
+              <div class="settings-row" style="display: flex; align-items: center; gap: 8px;">
+                <label style="min-width: 100px; color: #a89f8c; font-size: 11px;">Opacity:</label>
+                <div class="cslider" id="item-hover-opacity-slider" style="flex: 1;"></div>
+                <span class="scale-value" id="item-hover-opacity-value" style="min-width: 40px;">85%</span>
+              </div>
+              
+              <div style="margin-top: 8px; font-size: 10px; color: #8a8578;">
+                Hover over items in-game while holding the activation key to see their estimated value with currency icon.
+              </div>
+            </div>
           </section>
 
           <section class="set-card" id="sec-currency">
             <div class="set-card-lab">Currency</div>
             <div class="set-row-between">
-              <div class="set-inline"><label title="Currencies auto-filled as payment options each time you add a currency to buy (toggle at right).">Default payments</label><span class="set-sub">seeded into every new currency</span></div>
+              <div class="set-inline"><label title="Currencies auto-filled as payment options each time you add a currency to buy (toggle at right).">Default payments</label><span class="set-sub">auto-fill into buckets</span></div>
               <label class="switch" title="Auto-fill these into each new currency"><input type="checkbox" id="auto-defaults" /><span class="sw-track"></span><span class="sw-lab">auto-fill</span></label>
             </div>
             <div class="set-chips-row"><div id="default-items" class="chips"></div><button id="btn-add-default" class="chip-add" title="Add a default currency">+ add</button></div>
             <div class="set-rates">
-              <div class="set-inline"><label title="Manually set exchange rates for the core currencies. Yours override the market; blank cells use live data.">Rate overrides</label><span class="set-sub">grey = live market; type to pin your own; accepts 0.25, 1/4 or 1:4</span></div>
+              <div class="set-inline"><label title="Manually set exchange rates for the core currencies. Yours override the market; blank cells use live data.">Rate overrides</label><span class="set-sub">your guesses beat the feed</span></div>
               <div id="ovr-panel" class="ovr-panel"><div id="ovr-grid" class="ovr-grid"></div></div>
               <div class="set-legend"><span class="legend-swatch"></span>blue border = your override</div>
             </div>
-            <label class="switch set-excl" title="Ange charges gold per unit traded, so routing thousands of low-value Exalted through a loop drains gold. This skips Exalted as an intermediate hop when building arbitrage routes."><input type="checkbox" id="exclude-exalted-arb" /><span class="sw-track"></span><span class="sw-lab">Exclude Exalted from arbitrage routes</span><span class="set-sub">avoids gold-heavy loops</span></label>
+            <label class="switch set-excl" title="Ange charges gold per unit traded, so routing thousands of low-value Exalted through a loop drains gold. This skips Exalted as an intermediate hop in arbitrage routes."><input type="checkbox" id="exclude-exalted-arb" /><span class="sw-track"></span><span class="sw-lab">Exclude Exalted from arbitrage routes</span></label>
           </section>
 
           <div class="set-half">
             <section class="set-card" id="sec-pricecheck">
               <div class="set-card-lab">Price Check</div>
-              <label class="switch" title="Show a range slider beside each mod. Off saves space - the number inputs still work."><input type="checkbox" id="item-sliders" /><span class="sw-track"></span><span class="sw-lab">Show mod sliders</span></label>
+              <label class="switch" title="Show a range slider beside each mod. Off saves space - the number inputs still work."><input type="checkbox" id="item-sliders" /><span class="sw-track"></span><span class="sw-lab">Show mod range sliders</span></label>
               <div class="set-field set-login">
-                <label title="Logged-in sessions get exact server-side weighted searches for fungible damage rolls. You sign in on pathofexile.com's own page - this app never sees your credentials.">Trade account</label>
+                <label title="Logged-in sessions get exact server-side weighted searches for fungible damage rolls. You sign in on pathofexile.com's own page - this app never sees your credentials or session tokens.">Trade site login</label>
                 <button id="btn-poe-login" class="set-login-btn">Log in to pathofexile.com</button>
                 <span id="poe-login-status" class="settings-hint"></span>
                 <span class="set-sub">exact weighted searches; sign-in happens on GGG's own page</span>
@@ -215,6 +277,10 @@
       <div id="picker-list"></div>
     </div>
   </div>
+
+  <!-- Item hover tooltip scripts -->
+  <script src="item-hover-tooltip.js"></script>
+  <script src="item-hover-settings.js"></script>
 
   <script src="renderer.js"></script>
   <script src="tutorial.js"></script>
