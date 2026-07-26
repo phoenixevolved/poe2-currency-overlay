@@ -1,0 +1,68 @@
+<!-- Item Hover Tooltip Settings Card -->
+<!-- Add this to the General settings section in index.html -->
+
+<div class="set-card" id="sec-item-hover-settings">
+  <div class="set-card-lab">Item Hover Value Display</div>
+  
+  <!-- Enable/Disable Toggle -->
+  <div class="settings-row">
+    <label class="switch">
+      <input type="checkbox" id="item-hover-enabled">
+      <span class="sw-track"></span>
+      <span class="sw-lab">Show value tooltip when holding hotkey</span>
+    </label>
+  </div>
+  
+  <!-- Hotkey Selector -->
+  <div class="settings-row">
+    <label for="item-hover-hotkey" style="min-width: 100px;">Activation Key:</label>
+    <select id="item-hover-hotkey" style="flex: 1;">
+      <option value="alt">Alt</option>
+      <option value="ctrl">Ctrl</option>
+      <option value="shift">Shift</option>
+      <option value="super">Super (Windows Key)</option>
+    </select>
+  </div>
+  
+  <!-- Display Position -->
+  <div class="settings-row">
+    <label for="item-hover-position" style="min-width: 100px;">Display Position:</label>
+    <select id="item-hover-position" style="flex: 1;">
+      <option value="top-right">Top Right (default)</option>
+      <option value="bottom-right">Bottom Right</option>
+      <option value="top-left">Top Left</option>
+      <option value="bottom-left">Bottom Left</option>
+    </select>
+  </div>
+  
+  <!-- Icon Size Slider -->
+  <div class="settings-row">
+    <label style="min-width: 100px;">Icon Size:</label>
+    <div class="cslider" id="item-hover-icon-size-slider" style="flex: 1;"></div>
+    <span class="scale-value" id="item-hover-icon-size-value">24px</span>
+  </div>
+  
+  <!-- Font Size Slider -->
+  <div class="settings-row">
+    <label style="min-width: 100px;">Font Size:</label>
+    <div class="cslider" id="item-hover-font-size-slider" style="flex: 1;"></div>
+    <span class="scale-value" id="item-hover-font-size-value">12px</span>
+  </div>
+  
+  <!-- Text Color Picker -->
+  <div class="settings-row">
+    <label for="item-hover-text-color" style="min-width: 100px;">Text Color:</label>
+    <input type="color" id="item-hover-text-color" value="#f0d9a8" style="flex-shrink: 0; width: 50px; height: 32px; border-radius: 4px;">
+  </div>
+  
+  <!-- Opacity Slider -->
+  <div class="settings-row">
+    <label style="min-width: 100px;">Opacity:</label>
+    <div class="cslider" id="item-hover-opacity-slider" style="flex: 1;"></div>
+    <span class="scale-value" id="item-hover-opacity-value">85%</span>
+  </div>
+  
+  <div class="settings-note" style="margin-top: 8px; font-size: 10px; color: #8a8578;">
+    Hover over items in-game while holding the activation key to see their estimated value with currency icon.
+  </div>
+</div>
